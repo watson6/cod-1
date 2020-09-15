@@ -1,10 +1,16 @@
+import json
+from datetime import timedelta
+
 from django.db import models
-from utils.common.models import UUIDModel, OwnerModel, DateTimeFramedModel, TimeFramedModel
+from django.db.models import QuerySet
 from model_utils.choices import Choices
-from utils.common.constants import STATUS_PUBLISHED, STATUS_OFFLINE, STATUS_DRAFT
 from model_utils.models import StatusModel, TimeStampedModel, SoftDeletableModel
-from project.models import Project
+
 from converge.constants import CONVERGE_REASON_CHOICES, SYSTEM_OPS
+from message.models import Message
+from project.models import Project
+from utils.common.constants import STATUS_PUBLISHED, STATUS_OFFLINE, STATUS_DRAFT
+from utils.common.models import UUIDModel, OwnerModel, DateTimeFramedModel, TimeFramedModel
 
 
 # Create your models here.
@@ -17,7 +23,7 @@ class BurrConverge(UUIDModel, OwnerModel, TimeStampedModel, SoftDeletableModel, 
     section = models.PositiveSmallIntegerField(verbose_name='收敛区间', default=5)
     count = models.PositiveSmallIntegerField(verbose_name='收敛阈值', default=3)
     project = models.ForeignKey(Project, verbose_name='收敛项目', on_delete=models.CASCADE)
-    filter_args = models.TextField(verbose_name='过滤条件', blank=True, null=True)
+    filter_kwargs = models.TextField(verbose_name='过滤条件', blank=True, null=True)
 
     class Meta:
         verbose_name_plural = verbose_name = '- 毛刺削峰收敛'

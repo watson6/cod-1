@@ -12,4 +12,4 @@ def handler_message_post_save(sender, instance, **kwargs):
     created = kwargs.get('created')
     if created:
         message_handler.apply_async(args=[instance.id])
-        logger.info('handler message post save: %s' % instance.title)
+        logger.info('[!] handler message post save: %s' % instance.title)

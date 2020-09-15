@@ -28,10 +28,6 @@ class Message(UUIDModel, TimeStampedModel):
     def __str__(self):
         return self.title
 
-    def get_project(self):
-        from project.models import Project
-        return Project.objects.get(label=self.project)
-
     def get_data_source(self):
         from data_source.models import DataSource
         return DataSource.objects.get(label=self.ds)

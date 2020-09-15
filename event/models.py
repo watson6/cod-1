@@ -10,6 +10,7 @@ from event.constants import STATUS_NO_RESPONSE, STATUS_PROCESSING, STATUS_RESOLV
 from converge.models import BurrConverge
 from taggit.managers import TaggableManager
 from utils.taggit.models import TaggedUUIDItem
+from data_source.models import DataSource
 
 
 # Create your models here.
@@ -21,6 +22,7 @@ class Event(UUIDModel, OwnerModel, DateTimeFramedModel, TimeStampedModel, Status
     project = models.ForeignKey(Project, verbose_name='所属项目', on_delete=models.CASCADE)
     host = models.CharField(verbose_name='主机标识', max_length=128)
     level = models.PositiveSmallIntegerField(verbose_name='事件级别', choices=LEVEL_CHOICES, default=LEVEL_WARNING)
+    ds = models.ForeignKey(DataSource, verbose_name='数据源', on_delete=models.CASCADE)
     grade = models.ForeignKey(Project, verbose_name='通知级别',
                               on_delete=models.CASCADE,
                               blank=True,
