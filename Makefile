@@ -11,3 +11,4 @@ clean:
 
 make:
 	python manage.py makemigrations account auth_token data_source converge project silence event message
+	python manage.py migrate
