@@ -26,6 +26,7 @@ urlpatterns = [
     path('grappelli/', include('grappelli.urls')),
     path('admin/', admin.site.urls),
     path('mdeditor/', include('mdeditor.urls')),
+    path('datasource/', include('data_source.urls')),
 ]
 
 # 自研 APP 路由
