@@ -1,9 +1,8 @@
-from jsonpath_rw import parse
-from project.authentications import ProjectTokenAuthentication, PrometheusAuthentication
 from rest_framework import status
 from rest_framework.mixins import CreateModelMixin
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
+from data_source.authentications import WebHookAuthentication
 
 from message.models import Message
 from data_source.serializers import WebHookMessageSerializer, \
@@ -15,7 +14,7 @@ from data_source.serializers import WebHookMessageSerializer, \
 class WebHookMessageViewSets(CreateModelMixin, GenericViewSet):
     queryset = Message.objects.filter(is_enabled=True, is_deleted=False)
     serializer_class = WebHookMessageSerializer
-    authentication_classes = [ProjectTokenAuthentication]
+    authentication_classes = [WebHookAuthentication]
 
 
 class PrometheusMessageViewSets(CreateModelMixin, GenericViewSet):

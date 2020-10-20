@@ -1,7 +1,7 @@
-from rest_framework.routers import DefaultRouter
 from django.urls import path, include
-from data_source.views import WebHookMessageViewSets
+from rest_framework.routers import DefaultRouter
 
+from data_source.views import WebHookMessageViewSets, PrometheusMessageViewSets
 
 router = DefaultRouter()
 router.register(r'prometheus', PrometheusMessageViewSets)

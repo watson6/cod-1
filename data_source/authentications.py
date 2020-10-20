@@ -3,6 +3,8 @@ from rest_framework.exceptions import AuthenticationFailed
 from auth_token.models import AuthToken
 from data_source.models import DataSource
 from utils.common.constants import STATUS_PUBLISHED
+from django.conf import settings
+from django.contrib.auth import get_user_model
 
 
 class TokenAuthentication(BaseAuthentication):
@@ -58,3 +60,23 @@ class TokenAuthentication(BaseAuthentication):
                 raise AuthenticationFailed('token not belong to this project')
         except (DataSource.DoesNotExist, DataSource.MultipleObjectsReturned):
             raise AuthenticationFailed('no project registered or project registered more then one')
+
+
+class WebHookAuthentication(TokenAuthentication):
+    """WebHook 通过 url 传递 token"""
+
+    def get_token(self, request):
+        try:
+            token = request.query_params.get(self.keyword)
+        except Exception as e:
+            raise AuthenticationFailed(str(e))
+
+        return token
+
+    def authenticate(self, request):
+        if settings.DEBUG:
+            user_model = get_user_model()
+            admin = user_model.objects.get(username='admin')
+            return admin, ""
+        else:
+            return super(WebHookAuthentication, self).authenticate(request)
