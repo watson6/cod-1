@@ -1,25 +1,26 @@
-from rest_framework import status
-from rest_framework.mixins import CreateModelMixin
-from rest_framework.response import Response
-from rest_framework.viewsets import GenericViewSet
-from data_source.authentications import WebHookAuthentication
+from jsonpath_rw import parse
 
+from rest_framework import status
+from rest_framework.response import Response
+from rest_framework.mixins import CreateModelMixin
+from rest_framework.viewsets import GenericViewSet
+
+from data_source.authentications import RestFulAuthentication, PrometheusAuthentication
+from data_source.serializers import RestFulMessageSerializer, PrometheusMessageSerializer
 from message.models import Message
-from data_source.serializers import WebHookMessageSerializer, \
-    PrometheusMessageSerializer
 
 
 # Create your views here.
 
-class WebHookMessageViewSets(CreateModelMixin, GenericViewSet):
-    queryset = Message.objects.filter(is_enabled=True, is_deleted=False)
-    serializer_class = WebHookMessageSerializer
-    authentication_classes = [WebHookAuthentication]
+class RestFulMessageViewSets(CreateModelMixin, GenericViewSet):
+    queryset = Message.objects.filter()
+    serializer_class = RestFulMessageSerializer
+    authentication_classes = [RestFulAuthentication]
 
 
 class PrometheusMessageViewSets(CreateModelMixin, GenericViewSet):
     """ Prometheus 专用接口"""
-    queryset = Message.objects.filter(is_enabled=True, is_deleted=False)
+    queryset = Message.objects.filter()
     serializer_class = PrometheusMessageSerializer
     authentication_classes = [PrometheusAuthentication]
 

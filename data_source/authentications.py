@@ -62,7 +62,7 @@ class TokenAuthentication(BaseAuthentication):
             raise AuthenticationFailed('no project registered or project registered more then one')
 
 
-class WebHookAuthentication(TokenAuthentication):
+class RestFulAuthentication(TokenAuthentication):
     """WebHook 通过 url 传递 token"""
 
     def get_token(self, request):
@@ -79,4 +79,12 @@ class WebHookAuthentication(TokenAuthentication):
             admin = user_model.objects.get(username='admin')
             return admin, ""
         else:
-            return super(WebHookAuthentication, self).authenticate(request)
+            return super(RestFulAuthentication, self).authenticate(request)
+
+
+class PrometheusAuthentication(RestFulAuthentication):
+    """ project = prometheus """
+
+    @staticmethod
+    def get_project(request):
+        return "prometheus"

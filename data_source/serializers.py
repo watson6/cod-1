@@ -17,7 +17,7 @@ class MessageRetrieveSerializer(ModelSerializer):
         fields = '__all__'
 
 
-class WebHookMessageSerializer(ModelSerializer):
+class RestFulMessageSerializer(ModelSerializer):
     class Meta:
         model = Message
         fields = '__all__'

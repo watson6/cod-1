@@ -16,7 +16,7 @@ class AuthToken(UUIDModel, OwnerModel, StatusModel, DateTimeFramedModel, SoftDel
 
     name = models.CharField(verbose_name='秘钥名称', max_length=50)
     token = models.CharField(verbose_name='认证秘钥', max_length=32, default=uuid4().hex)
-    data_source = models.ForeignKey(DataSource, verbose_name='数据源')
+    data_source = models.ForeignKey(DataSource, verbose_name='数据源', on_delete=models.CASCADE)
 
     class Meta:
         verbose_name_plural = verbose_name = '- 密钥认证'
