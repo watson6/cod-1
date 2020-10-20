@@ -17,7 +17,7 @@ class MessageRetrieveSerializer(ModelSerializer):
         fields = '__all__'
 
 
-class RestFulMessageSerializer(ModelSerializer):
+class RestAPIMessageSerializer(ModelSerializer):
     class Meta:
         model = Message
         fields = '__all__'

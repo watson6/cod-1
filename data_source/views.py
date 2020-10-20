@@ -5,24 +5,24 @@ from rest_framework.response import Response
 from rest_framework.mixins import CreateModelMixin
 from rest_framework.viewsets import GenericViewSet
 
-from data_source.authentications import RestFulAuthentication, PrometheusAuthentication
-from data_source.serializers import RestFulMessageSerializer, PrometheusMessageSerializer
+from data_source.authentications import RestAPIAuthentication
+from data_source.serializers import RestAPIMessageSerializer, PrometheusMessageSerializer
 from message.models import Message
 
 
 # Create your views here.
 
-class RestFulMessageViewSets(CreateModelMixin, GenericViewSet):
+class RestAPIMessageViewSets(CreateModelMixin, GenericViewSet):
     queryset = Message.objects.filter()
-    serializer_class = RestFulMessageSerializer
-    authentication_classes = [RestFulAuthentication]
+    serializer_class = RestAPIMessageSerializer
+    authentication_classes = [RestAPIAuthentication]
 
 
 class PrometheusMessageViewSets(CreateModelMixin, GenericViewSet):
     """ Prometheus 专用接口"""
     queryset = Message.objects.filter()
     serializer_class = PrometheusMessageSerializer
-    authentication_classes = [PrometheusAuthentication]
+    authentication_classes = [RestAPIAuthentication]
 
     @staticmethod
     def get_loop_data(data):

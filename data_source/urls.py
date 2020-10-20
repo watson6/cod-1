@@ -1,11 +1,11 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
-from data_source.views import RestFulMessageViewSets, PrometheusMessageViewSets
+from data_source.views import RestAPIMessageViewSets, PrometheusMessageViewSets
 
 router = DefaultRouter()
 router.register(r'prometheus', PrometheusMessageViewSets)
-router.register(r'restful', RestFulMessageViewSets)
+router.register(r'restapi', RestAPIMessageViewSets)
 
 urlpatterns = [
     path('', include(router.urls)),

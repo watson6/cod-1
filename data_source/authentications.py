@@ -11,14 +11,14 @@ class TokenAuthentication(BaseAuthentication):
     """ 验证项目绑定账号的 Token 是否有效 """
     keyword = 'token'
 
-    @staticmethod
-    def get_data_source(request):
-        data = request.POST
-        try:
-            data_source = data['data_source']
-        except KeyError:
-            data_source = None
-        return data_source
+    # @staticmethod
+    # def get_data_source(request):
+    #     data = request.POST
+    #     try:
+    #         data_source = data['data_source']
+    #     except KeyError:
+    #         data_source = None
+    #     return data_source
 
     def get_token(self, request):
         auth = get_authorization_header(request).split()
@@ -41,7 +41,7 @@ class TokenAuthentication(BaseAuthentication):
         return token
 
     def authenticate(self, request):
-        data_source = self.get_data_source(request)
+        # data_source = self.get_data_source(request)
         token = self.get_token(request)
 
         try:
@@ -53,8 +53,8 @@ class TokenAuthentication(BaseAuthentication):
             raise AuthenticationFailed('User inactive or deleted.')
 
         try:
-            ds = DataSource.objects.get(label=data_source)
-            if token in ds.tokens.filter(status=STATUS_PUBLISHED) and not token.is_expired:
+            # ds = DataSource.objects.get(label=data_source)
+            if token.status is STATUS_PUBLISHED and not token.is_expired:
                 return token.user, token
             else:
                 raise AuthenticationFailed('token not belong to this project')
@@ -62,7 +62,7 @@ class TokenAuthentication(BaseAuthentication):
             raise AuthenticationFailed('no project registered or project registered more then one')
 
 
-class RestFulAuthentication(TokenAuthentication):
+class RestAPIAuthentication(TokenAuthentication):
     """WebHook 通过 url 传递 token"""
 
     def get_token(self, request):
@@ -79,12 +79,12 @@ class RestFulAuthentication(TokenAuthentication):
             admin = user_model.objects.get(username='admin')
             return admin, ""
         else:
-            return super(RestFulAuthentication, self).authenticate(request)
+            return super(RestAPIAuthentication, self).authenticate(request)
 
 
-class PrometheusAuthentication(RestFulAuthentication):
-    """ project = prometheus """
-
-    @staticmethod
-    def get_project(request):
-        return "prometheus"
+# class PrometheusAuthentication(RestFulAuthentication):
+#     """ project = prometheus """
+# 
+#     @staticmethod
+#     def get_project(request):
+#         return "prometheus"
