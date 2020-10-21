@@ -45,8 +45,8 @@ class TokenAuthentication(BaseAuthentication):
             raise AuthenticationFailed('User inactive or deleted.')
 
         try:
-            if token.status is STATUS_PUBLISHED and not token.is_expired:
-                return token.user, token
+            if token.status == STATUS_PUBLISHED and not token.is_removed:
+                return token.owner, token
             else:
                 raise AuthenticationFailed('token not belong to this project')
         except (DataSource.DoesNotExist, DataSource.MultipleObjectsReturned):

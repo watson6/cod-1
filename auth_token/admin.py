@@ -12,7 +12,7 @@ class AuthTokenAdmin(admin.ModelAdmin):
         """检测 token 生效"""
         return obj.is_expired
 
-    list_display = ['name', 'token', 'owner', 'data_source', 'status', 'is_effective', 'is_removed', 'start', 'end']
+    list_display = ['name', 'token', 'owner', 'data_source', 'status', 'is_removed', 'start', 'end']
     list_filter = ['status']
     search_fields = ['name', 'token', 'owner_username', 'data_source__name']
     is_effective.short_description = '是否生效'
