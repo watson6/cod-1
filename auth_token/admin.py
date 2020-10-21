@@ -12,12 +12,12 @@ class AuthTokenAdmin(admin.ModelAdmin):
         """检测 token 生效"""
         return obj.is_expired
 
-    list_display = ['name', 'token', 'owner', 'status', 'is_effective', 'is_removed', 'start', 'end']
+    list_display = ['name', 'token', 'owner', 'data_source', 'status', 'is_effective', 'is_removed', 'start', 'end']
     list_filter = ['status']
-    search_fields = ['name', 'token', 'owner_username']
+    search_fields = ['name', 'token', 'owner_username', 'data_source__name']
     is_effective.short_description = '是否生效'
     fieldsets = [
-        ('基本信息', {'classes': ['grp-collapse grp-open'], 'fields': ['name', 'token', 'owner']}),
+        ('基本信息', {'classes': ['grp-collapse grp-open'], 'fields': ['name', 'token', 'data_source', 'owner']}),
         ('时间管理', {'classes': ['grp-collapse grp-open'], 'fields': ['start', 'end']}),
         ('状态管理', {'classes': ['grp-collapse grp-open'], 'fields': ['status', 'is_removed']}),
     ]

@@ -6,11 +6,11 @@ from message.models import Message
 
 @admin.register(Message)
 class MessageAdmin(admin.ModelAdmin):
-    list_display = ['project', 'ds', 'host', 'type', 'title', 'level', 'status', 'created', 'modified']
+    list_display = ['project', 'data_source', 'host', 'type', 'title', 'level', 'status', 'created', 'modified']
     list_filter = ['status']
-    search_fields = ['project', 'ds', 'host', 'type', 'title', 'raw']
+    search_fields = ['project', 'data_source', 'host', 'type', 'title', 'raw']
     fieldsets = [
-        ('基本信息', {'classes': ['grp-collapse grp-open'], 'fields': ['project', 'ds', 'host', 'type', 'title']}),
+        ('基本信息', {'classes': ['grp-collapse grp-open'], 'fields': ['project', 'host', 'type', 'title']}),
         ('状态管理', {'classes': ['grp-collapse grp-open'], 'fields': ['status', 'level']}),
         ('原始数据', {'classes': ['grp-collapse grp-open'], 'fields': ['raw']}),
     ]

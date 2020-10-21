@@ -9,16 +9,11 @@ class TokenAuthentication(BaseAuthentication):
     """ 验证项目绑定账号的 Token 是否有效 """
     keyword = 'token'
 
-    @staticmethod
-    def get_data_source(request):
-        data = request.POST
-        try:
-            data_source = data['data_source']
-        except KeyError:
-            data_source = None
-        return data_source
-
     def get_token(self, request):
+        """
+        从 http 请求头或 POST 数据中获取认证秘钥
+        @todo 待添加从 post 数据获取秘钥
+        """
         auth = get_authorization_header(request).split()
 
         if not auth or auth[0].lower() != self.keyword.lower().encode():
@@ -39,7 +34,6 @@ class TokenAuthentication(BaseAuthentication):
         return token
 
     def authenticate(self, request):
-        data_source = self.get_data_source(request)
         token = self.get_token(request)
 
         try:
@@ -51,8 +45,7 @@ class TokenAuthentication(BaseAuthentication):
             raise AuthenticationFailed('User inactive or deleted.')
 
         try:
-            ds = DataSource.objects.get(label=data_source)
-            if token in ds.tokens.filter(status=STATUS_PUBLISHED) and not token.is_expired:
+            if token.status is STATUS_PUBLISHED and not token.is_expired:
                 return token.user, token
             else:
                 raise AuthenticationFailed('token not belong to this project')

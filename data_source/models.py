@@ -16,9 +16,7 @@ class DataSource(UUIDModel, StatusModel, TimeStampedModel, SoftDeletableModel):
     STATUS = Choices(STATUS_DRAFT, STATUS_PUBLISHED, STATUS_OFFLINE)
     name = models.CharField(verbose_name='数据源', max_length=50)
     label = models.CharField(verbose_name='标示符', max_length=50, unique=True)
-    tokens = models.ManyToManyField(AuthToken, verbose_name='认证令牌', blank=True)
-    auto_close = models.BooleanField(verbose_name='自动关闭', default=True)
-    close_after = models.PositiveSmallIntegerField(verbose_name='关闭超时', default=360)
+    close_timeout = models.PositiveSmallIntegerField(verbose_name='超时关闭', default=360)
 
     tags = TaggableManager(through=TaggedUUIDItem, blank=True)
 

@@ -7,10 +7,10 @@ from data_source.models import DataSource
 
 @admin.register(DataSource)
 class DataSourceAdmin(admin.ModelAdmin):
-    list_display = ['name', 'label', 'auto_close', 'close_after', 'status', 'is_removed', 'created', 'modified']
+    list_display = ['name', 'label', 'close_timeout', 'status', 'is_removed', 'created', 'modified']
     list_filter = ['is_removed', 'status']
     search_fields = ['name', 'label']
     fieldsets = [
-        ('基本信息', {'classes': ['grp-collapse grp-open'], 'fields': ['name', 'label', 'close_after']}),
-        ('状态管理', {'classes': ['grp-collapse grp-open'], 'fields': ['status', 'is_removed', 'auto_close']}),
+        ('基本信息', {'classes': ['grp-collapse grp-open'], 'fields': ['name', 'label', 'close_timeout']}),
+        ('状态管理', {'classes': ['grp-collapse grp-open'], 'fields': ['status', 'is_removed']}),
     ]

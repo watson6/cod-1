@@ -12,10 +12,5 @@ LEVEL_CHOICES = (
 LEVEL_NEED_UPGRADE = [1, 2]
 
 # 告警消息状态
-STATUS_ALERT = 0
-STATUS_RECOVER = 1
-
-STATUS_CHOICES = (
-    (STATUS_ALERT, '告警'),
-    (STATUS_RECOVER, '恢复')
-)
+STATUS_ALERT = 'alert'
+STATUS_RECOVER = 'recover'
