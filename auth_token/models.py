@@ -1,7 +1,7 @@
 from uuid import uuid4
 from django.db import models
-from utils.common.models import UUIDModel, OwnerModel, DateTimeFramedModel
-from model_utils.models import StatusModel, SoftDeletableModel
+from utils.common.models import OwnerModel, DateTimeFramedModel
+from model_utils.models import StatusModel, SoftDeletableModel, UUIDModel
 from model_utils.choices import Choices
 from utils.common.constants import STATUS_PUBLISHED, STATUS_DRAFT, STATUS_OFFLINE
 from data_source.models import DataSource
@@ -18,7 +18,7 @@ class AuthToken(UUIDModel, OwnerModel, StatusModel, DateTimeFramedModel, SoftDel
     STATUS = Choices(STATUS_DRAFT, STATUS_PUBLISHED, STATUS_OFFLINE)
 
     name = models.CharField(verbose_name='秘钥名称', max_length=50)
-    token = models.CharField(verbose_name='认证秘钥', max_length=32, default=uuid4().hex)
+    token = models.UUIDField(verbose_name='认证秘钥', default=uuid4())
     data_source = models.ForeignKey(DataSource, verbose_name='数据源', on_delete=models.CASCADE)
 
     class Meta:

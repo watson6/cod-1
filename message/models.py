@@ -1,7 +1,7 @@
 from django.db import models
 from message.constants import LEVEL_CHOICES, STATUS_ALERT, STATUS_RECOVER
-from model_utils.models import TimeStampedModel, StatusModel
-from utils.common.models import UUIDModel
+from model_utils.models import TimeStampedModel, StatusModel, UUIDModel
+# from utils.common.models import UUIDModel
 from utils.taggit.models import TaggedUUIDItem
 from taggit.managers import TaggableManager
 from model_utils.choices import Choices

@@ -1,11 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from model_utils.models import SoftDeletableModel
+from model_utils.models import SoftDeletableModel, UUIDModel
 from django.contrib.auth.models import BaseUserManager
 from account.avatar import IDAvatar
 from utils.taggit.models import TaggedUUIDItem
 from taggit.managers import TaggableManager
-from utils.common.models import UUIDModel
 
 
 class UserManager(BaseUserManager):

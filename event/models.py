@@ -1,7 +1,7 @@
 from django.db import models
 from django.conf import settings
-from utils.common.models import UUIDModel, OwnerModel, DateTimeFramedModel
-from model_utils.models import TimeStampedModel, StatusModel, SoftDeletableModel
+from utils.common.models import OwnerModel, DateTimeFramedModel
+from model_utils.models import TimeStampedModel, StatusModel, SoftDeletableModel, UUIDModel
 from model_utils.choices import Choices
 from project.models import Project
 from message.models import Message

@@ -1,6 +1,5 @@
 from django.db import models
-from utils.common.models import UUIDModel
-from model_utils.models import StatusModel, TimeStampedModel, SoftDeletableModel
+from model_utils.models import StatusModel, TimeStampedModel, SoftDeletableModel, UUIDModel
 from model_utils.choices import Choices
 from utils.common.constants import STATUS_PUBLISHED, STATUS_DRAFT, STATUS_OFFLINE
 # from auth_token.models import AuthToken

@@ -1,6 +1,6 @@
 from django.db import models
-from utils.common.models import UUIDModel, OwnerModel
-from model_utils.models import TimeStampedModel, SoftDeletableModel
+from utils.common.models import OwnerModel
+from model_utils.models import TimeStampedModel, SoftDeletableModel, UUIDModel
 from project.models import Project
 
 
