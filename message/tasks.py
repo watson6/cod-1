@@ -109,13 +109,15 @@ def message_handler(message_id) -> None:
     # 配置告警消息收敛策略
     # 这个配置暂时放在此处，未来有多种策略时移到 django.conf.settings 中
     # 配置使用字符串形式避免后期迁移配置时类型导入
-    strategies = ['MessageBurrConvergeStrategy']
 
-    # 获取上报告警消息对象
-    message = Message.objects.get(id=message_id)
-
-    # 循环消息收敛策略
-    for strategy_str in strategies:
-        strategy_class = getattr(sys.modules[__name__], strategy_str)
-        strategy_instance = strategy_class(message=message)
-        strategy_instance.do_converge()
+    print(message_id)
+    # strategies = ['MessageBurrConvergeStrategy']
+    #
+    # # 获取上报告警消息对象
+    # message = Message.objects.get(id=message_id)
+    #
+    # # 循环消息收敛策略
+    # for strategy_str in strategies:
+    #     strategy_class = getattr(sys.modules[__name__], strategy_str)
+    #     strategy_instance = strategy_class(message=message)
+    #     strategy_instance.do_converge()
